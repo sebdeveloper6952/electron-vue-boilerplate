@@ -3,10 +3,10 @@ import axios from 'axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 
-
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import './sass/app.scss';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.http = Vue.prototype.$http = axios;
@@ -15,13 +15,22 @@ Vue.config.productionTip = false;
 // Vue plugins registration
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
-  iconfont: 'fa'
+  iconfont: 'fa',
+  theme: {
+    primary: '#324e7b',
+    secondary: '#5068a9',
+    accent: '#f8f8f8',
+  }
 });
 
 const routes = [
   {
-    path: '/home',
-    component: Vue.component('home-component', require('./components/Home.vue').default)
+    path: '/page-one',
+    component: Vue.component('page-one', require('./components/PageOne.vue').default)
+  },
+  {
+    path: '/page-two',
+    component: Vue.component('page-two', require('./components/PageTwo.vue').default)
   }
 ];
 
@@ -32,5 +41,8 @@ const router = new VueRouter({
 /* eslint-disable no-new */
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  mounted () {
+    this.$router.push('/home')
+  }
 }).$mount('#app');
