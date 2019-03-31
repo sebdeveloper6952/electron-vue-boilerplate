@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 
@@ -13,6 +14,7 @@ Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 // Vue plugins registration
+Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
   iconfont: 'fa',
